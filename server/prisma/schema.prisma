@@ -1,0 +1,215 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========================================
+// USER MODEL - Untuk autentikasi & profil
+// ========================================
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relasi
+  chats         Chat[]
+  workflows     Workflow[]
+  analytics     Analytics[]
+  invoices      Invoice[]
+  refreshTokens RefreshToken[]
+  
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// ========================================
+// REFRESH TOKEN - Untuk JWT refresh
+// ========================================
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  // Relasi
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("refresh_tokens")
+}
+
+// ========================================
+// CHAT MODEL - Untuk AI Chat feature
+// ========================================
+model Chat {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String   @default("New Chat")
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relasi
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+  
+  @@map("chats")
+}
+
+model Message {
+  id        String      @id @default(uuid())
+  chatId    String
+  role      MessageRole
+  content   String      @db.Text
+  createdAt DateTime    @default(now())
+  
+  // Relasi
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  
+  @@map("messages")
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+// ========================================
+// WORKFLOW MODEL - Untuk n8n integration
+// ========================================
+model Workflow {
+  id          String         @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  status      WorkflowStatus @default(INACTIVE)
+  n8nId       String?        // ID workflow di n8n
+  webhookUrl  String?        // Webhook URL dari n8n
+  
+  // Configuration
+  config Json?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relasi
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  executions    WorkflowExecution[]
+  
+  @@map("workflows")
+}
+
+enum WorkflowStatus {
+  ACTIVE
+  INACTIVE
+  ERROR
+}
+
+model WorkflowExecution {
+  id         String            @id @default(uuid())
+  workflowId String
+  status     ExecutionStatus   @default(RUNNING)
+  startedAt  DateTime          @default(now())
+  finishedAt DateTime?
+  error      String?           @db.Text
+  result     Json?
+  
+  // Relasi
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  
+  @@map("workflow_executions")
+}
+
+enum ExecutionStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+}
+
+// ========================================
+// ANALYTICS MODEL - Untuk dashboard stats
+// ========================================
+model Analytics {
+  id        String   @id @default(uuid())
+  userId    String
+  metric    String   // e.g., "chats_created", "workflows_run", "api_calls"
+  value     Float
+  date      DateTime @default(now())
+  metadata  Json?
+  
+  // Relasi
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("analytics")
+  @@index([userId, metric, date])
+}
+
+// ========================================
+// INVOICE/BILLING MODEL - Untuk payments
+// ========================================
+model Invoice {
+  id            String        @id @default(uuid())
+  userId        String
+  amount        Float
+  currency      String        @default("USD")
+  status        InvoiceStatus @default(PENDING)
+  plan          String?       // "free", "pro", "enterprise"
+  billingPeriod String?       // "monthly", "yearly"
+  paidAt        DateTime?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relasi
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("invoices")
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+// ========================================
+// SPREADSHEET SYNC - Untuk Google Sheets sync
+// ========================================
+model SpreadsheetSync {
+  id           String   @id @default(uuid())
+  userId       String
+  spreadsheetId String  // Google Sheets ID
+  sheetName    String
+  lastSyncAt   DateTime?
+  syncStatus   String   @default("pending")
+  
+  // Config
+  mapping Json? // Column mapping configuration
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("spreadsheet_syncs")
+}
