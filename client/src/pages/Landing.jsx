@@ -3,7 +3,7 @@
   import HeroSection from '../components/HeroSection';
   import FeaturesSection from '../components/FeaturesSection';
   import BenefitsSection from '../components/BenefitsSection';
-  import CTASection from '../components/CTASection';
+  // import CTASection from '../components/CTASection';
   import PricingSection from '../components/PricingSection';
   import Footer from '../components/Footer';
 
@@ -14,7 +14,7 @@
         <HeroSection />
         <FeaturesSection />
         <BenefitsSection />
-        <CTASection />
+        {/* <CTASection /> */}
         <PricingSection />
         <Footer />
       </div>

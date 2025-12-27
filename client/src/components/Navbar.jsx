@@ -4,7 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-md border-b border-dark-border">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
 
           <Link to="/" className="flex items-center space-x-2">
@@ -58,7 +58,7 @@ function Navbar() {
             <Link to="/login" className="px-6 py-2 text-white hover:text-primary transition">
               Masuk
             </Link>
-            <Link to="/register"  className="px-3 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-base bg-white text-dark rounded-lg hover:bg-gray-100 transition font-medium whitespace-nowrap">
+            <Link to="/register"  className="px-3 py-1.5 sm:px-6 sm:py-2 text-xs sm:text-base bg-white text-dark rounded-lg hover:bg-gray-300 transition font-medium whitespace-nowrap">
               Daftar Sekarang
             </Link>
           </div>

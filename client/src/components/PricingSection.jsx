@@ -6,10 +6,10 @@ function PricingSection() {
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Paket Harga yang Fleksibel untuk Kebutuhan Bisnis Anda
           </h2>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-3xl mx-auto mb-10">
             Pilih paket yang sesuai dengan bisnis Anda, mulai dari personal gratis hingga 
             automasi tingkat lanjut untuk ekosistem bisnis yang lebih tinggi
           </p>
@@ -24,12 +24,12 @@ function PricingSection() {
                 Gratis <span className="text-gray-400 text-lg">(Starter)</span>
               </h3>
               <p className="text-gray-400 text-sm">
-                Cocok untuk perseorangan atau yang baru mencoba
+                Cocok untuk yang baru mencoba
               </p>
             </div>
 
             <div className="mb-6">
-              <div className="text-5xl font-bold text-white mb-2">Rp0</div>
+              <div className="text-5xl font-bold text-white mb-10">Rp0</div>
               <button className="w-full py-3 border border-gray-600 text-white rounded-lg hover:border-primary hover:text-primary transition">
                 Mulai Gratis
               </button>
@@ -78,8 +78,8 @@ function PricingSection() {
               </p>
             </div>
 
-            <div className="mb-6">
-              <div className="text-5xl font-bold text-white mb-2">Rp49.000</div>
+            <div className="mb-8">
+              <div className="text-5xl font-bold text-white mb-10">Rp49.000</div>
               <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-semibold">
                 Berlangganan PRO
               </button>
@@ -125,7 +125,7 @@ function PricingSection() {
             </div>
 
             <div className="mb-6">
-              <div className="text-5xl font-bold text-white mb-2">Rp499.000</div>
+              <div className="text-5xl font-bold text-white mb-10">Rp499.000</div>
               <button className="w-full py-3 border border-gray-600 text-white rounded-lg hover:border-primary hover:text-primary transition">
                 Pilih Paket Bisnis
               </button>
@@ -161,7 +161,7 @@ function PricingSection() {
         </div>
 
         {/* Footer Note */}
-        <p className="text-center text-gray-500 text-sm mt-8">
+        <p className="text-center text-gray-500 text-sm mt-16">
           (*) On-premise tersedia. Silahkan konsultasi dengan Sales untuk kebutuhan kustom Anda
         </p>
       </div>

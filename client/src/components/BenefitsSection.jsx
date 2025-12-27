@@ -5,16 +5,16 @@ function BenefitsSection() {
     <section className="py-20 px-6 bg-dark-card/30">
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
-        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">
+        <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
           Keunggulan yang Membedakan <span className="text-primary">Karo Agent</span> dari AI Konvensional
         </h2>
-        <p className="text-gray-400 text-center text-lg mb-16 max-w-3xl mx-auto">
+        <p className="text-gray-500 text-center text-lg mb-16 max-w-4xl mx-auto">
           Kesuksesan sama-sama canggih, namun hasilnya juga berbeda. AI konvensional memberi 
           jawaban, Karo Agent beserta solusi secara lengkap menyelamatkan Output yang kamu inginkan
         </p>
 
         {/* Comparison Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-4 mb-16">
           {/* Karo Agent */}
           <div className="bg-dark-card border border-primary/30 rounded-2xl p-8">
             <div className="flex items-center mb-6">
@@ -25,7 +25,7 @@ function BenefitsSection() {
                 Karo Agent – Hasil & Output
               </h3>
             </div>
-            <ul className="space-y-4 text-gray-300">
+            <ul className="space-y-4 text-gray-400">
               <li className="flex items-start">
                 <span className="text-primary mr-3 mt-1">✓</span>
                 <div>
@@ -48,7 +48,7 @@ function BenefitsSection() {
                 </div>
               </li>
             </ul>
-            <button className="mt-8 px-6 py-3 bg-white text-dark rounded-lg hover:bg-gray-100 transition font-semibold w-full">
+            <button className="mt-8 px-6 py-3 bg-white text-dark rounded-lg hover:bg-gray-300 transition font-semibold w-full">
               Pelajari Selanjut
             </button>
           </div>
@@ -91,7 +91,7 @@ function BenefitsSection() {
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-500 mb-0">
             Operasional bisnis jangka panjang dapat diselesaikan di sini.
           </p>
         </div>
